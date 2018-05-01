@@ -15,7 +15,8 @@ The only requirements to use the helper scripts are having `Geth` installed, and
 
 ### Startup
 
-The following steps will:
+The following steps will:  
+_(these all need to be run from the same path)_
 
  - Initialize a new Geth node within the current directy
  - Start an automining Geth instance
@@ -27,13 +28,13 @@ The following steps will:
      % misty_init.sh
      ```
 
- 2. Start the Auto-Miner
+ 2. Start the Auto-Miner, and load into a Geth console  
 
     ```bash
     % misty_run.sh
     ```
 
- 3. Start Mist
+ 3. Start Mist _(in another shell)_  
 
     ```bash
     % misty.sh
