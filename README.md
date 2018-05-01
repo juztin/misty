@@ -28,13 +28,13 @@ _(these all need to be run from the same path)_
      % misty_init.sh
      ```
 
- 2. Start the Auto-Miner, and load into a Geth console  
+ 2. Start the Auto-Miner, and load into a Geth console
 
     ```bash
     % misty_run.sh
     ```
 
- 3. Start Mist _(in another shell)_  
+ 3. Start Mist _(in another shell)_
 
     ```bash
     % misty.sh
@@ -57,14 +57,14 @@ To setup Truffle to deploy contracts to the above Geth nodes:
     ```javascript
     module.exports = {
       networks: {
-    
+
         mist: {
           host: '192.168.1.199',
           port: 8545,
           network_id: '*', // eslint-disable-line camelcase
           from: '0x4b68328d09470cb954bd1f437af302de09bcbfa1'  // An account listed within `genesis.json`
         }
-    
+
       }
     };
     ```
@@ -82,16 +82,18 @@ To setup Truffle to deploy contracts to the above Geth nodes:
     % truffle migrate --network mist --reset
     ```
 
+
 #### Add the deployed contract to the running instance of Mist
 
  1. Click `Contracts` from the main Mist screen, and then `Watch Contract`, towards the bottom of the screen.
  2. In the dialog:  
    1. Enter the contract address from the above Truffle migrate command
    2. Enter the contract name _(this can be anything you want)_
-   3. Add the ABI _(This is obtained from the Truffle `build` directory)_  
-       - Open the file `./build/contracts/{contract_name}.json`
-	   - Copy all the code for the `abi` value
-	   - Paste this into Mist
+   3. Add the JSON Interface by copying the output from below into the `JSON INTERFACE` field:  
+
+      ```bash
+      misty_abi.sh build/contracts/{contract_name}.json
+      ```
 
 From here you should see your contract, and be able to call all the functions.
 
