@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -rf ./.blockchain genesis.json
+rm -rf .misty

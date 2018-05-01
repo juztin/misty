@@ -3,8 +3,9 @@
 # Initializes a new Get blockchain with {n} number of accounts, each with 999 Ethereum.
 #
 
+PASSWORD="password"                # The password to use within the password file.
+PASSWORD_FILE=".misty/password"    # Password file used for new accounts.
 ACCOUNT_NUM=10                     # Number of accounts to create.
-ACCOUNT_PWD="password"             # Password used for all created accounts.
 BLOCK_DIFFICULTY="0x400"           # Mining difficulty.
 BLOCK_GASLIMIT="0x8000000"         # Gas limit.
 
@@ -23,7 +24,7 @@ createAccount() {
 	#  Sets:
 	#    accountId="1f057006cb657678b6ae849b954154c00b4a1f0c"
 	#
-	data=`geth --datadir .blockchain account new --password "$1"`
+	data=`geth --datadir .misty/blockchain account new --password "$1"`
 	ACCOUNT_ID=`echo $data | awk -F"{|}" '{print $2}'`
 }
 
@@ -36,7 +37,7 @@ createAccounts() {
 	# Creates `n` number of accounts
 	for (( i=0; i<$1; i++)); do
 		createAccount "$2"
-		ACCOUNTS=$ACCOUNTS'"0x'$ACCOUNT_ID'": { "balance": "99900000000000000000" },'$'\n    '
+		ACCOUNTS=$ACCOUNTS'"0x'$ACCOUNT_ID'": { "balance": "999000000000000000000" },'$'\n    '
 	done
 	# Remove trailing comma
 	ACCOUNTS=${ACCOUNTS:0:${#ACCOUNTS}-6}
@@ -68,30 +69,40 @@ createGenesis() {
   "alloc": {
     '"$ACCOUNTS"'
   }
-}' > genesis.json
+}' > ./.misty/genesis.json
 }
 
 # Initializes the new Geth blockchain, using the previsously created genesis file.
 #
 # @param 1: The blockchain directory.
 # @param 2: The genesis file.
-initChain() {
+initNode() {
 	geth \
-		--datadir .blockchain \
-		init genesis.json
+		--datadir .misty/blockchain \
+		init .misty/genesis.json
 }
 
 
 # ------------------------------------------------------------------------------
 
+# ----- Create .misty
+mkdir ./.misty
+
+# ----- Create Password File
+echo "Creating password file: \"$PASSWORD_FILE\""
+echo "$PASSWORD" > "$PASSWORD_FILE"
+
+# ----- Create Accounts
 echo "Creating $ACCOUNT_NUM Accounts..."
-createAccounts $ACCOUNT_NUM "$ACCOUNT_PWD";
+createAccounts $ACCOUNT_NUM "$PASSWORD_FILE";
 echo "------------------------------------"
 echo "    $ACCOUNTS"
 echo "------------------------------------"
 
+# ----- Create Genesis File
 echo "Creating Genesis..."
 createGenesis
 
-echo "Initializing Chain..."
-initChain
+# ----- Initialize Node
+echo "Initializing Node..."
+initNode

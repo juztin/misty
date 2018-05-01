@@ -4,8 +4,6 @@
 #
 
 
-GETH_IPC=`dirname "$0"`"/../.blockhain/geth.ipc"
-
 /Applications/Mist.app/Contents/MacOS/Mist \
 	--network 10 \
-	--rpc "$GETH_IPC"
+	--rpc ./.misty/blockchain/geth.ipc

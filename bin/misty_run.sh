@@ -7,15 +7,29 @@
 #   To connect Mist to this chain
 #
 #	```
-#   % /Applications/Mist.app/Contents/MacOS/Mist --network 10 --rpc ${PWD}/.blockchain/geth.ipc
+#   % /Applications/Mist.app/Contents/MacOS/Mist --network 10 --rpc ${PWD}/.misty/blockchain/geth.ipc
 #   ```
 #
 
 
-MINER_JS=`dirname "$0"`"/../scripts/miner.js"
+# We need to get the source directory for the script (resolve symlinked file)
+#   (OSX doesn't have `readlink -f`, so here's an ugly hack)
+DIR=`dirname $0`
+if [ -L $0 ]; then
+	# one-liner
+	#MINER_JS=$DIR/$(dirname "$(ls -l $DIR/misty_run.sh | awk '{print $11}')")"/../scripts/miner.js"
+	#
+	# readable'ish
+	LINKED_NAME=$(ls -l $DIR/misty_run.sh | awk '{print $11}')  # Get the linked filename
+	LINKED_DIR=`dirname  $LINKED_NAME`                          # Get the directory of the linked file
+	MINER_JS=$DIR/$LINKED_DIR"/../scripts/miner.js"             # Geth the path to miner.js
+else
+	MINER_JS=$DIR"/../scripts/miner.js"
+fi
+
 
 geth \
-	--datadir ./.blockchain \
+	--datadir ./.misty/blockchain \
 	--networkid 10 \
 	--maxpeers 3 \
 	--nat "any" \

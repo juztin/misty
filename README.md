@@ -27,7 +27,7 @@ The following steps will:
      % misty_init.sh
      ```
 
- 2. Start the auto-miner
+ 2. Start the Auto-Miner
 
     ```bash
     % misty_run.sh
