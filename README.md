@@ -53,7 +53,7 @@ To setup Truffle to deploy contracts to the above Geth nodes:
 
  1. Add the Geth node to `truffle.js` _(use your `ip` for the `host`, and one of the accounts created above for the `from`)_
 
-    ```json
+    ```javascript
     module.exports = {
       networks: {
     
