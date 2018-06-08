@@ -75,8 +75,9 @@ To setup Truffle to deploy contracts to the above Geth nodes:
      // Unlocks the given account, with the corresponding password, for 15 seconds.
      web3.personal.unlockAccount("0x4b68328d09470cb954bd1f437af302de09bcbfa1", "password", 15000)
      ```
-     or to unlock all accounts  
+     or
      ```javascript
+     // Unlocks all accounts, with the corresponding password, for 15 seconds.
      web3.personal.listAccounts.forEach(function (account) { web3.personal.unlockAccount(account, "password", 15000)) } });
      ```
 
