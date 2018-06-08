@@ -4,7 +4,7 @@ Helper scripts that create a Geth node with 10 accounts, with balances of 999, a
 
 ### Prerequisites
 
-The only requirements to use the helper scripts are having `Geth` installed, and a `Bash` shell.
+The only requirements to use the helper scripts are having `Geth` and `Mist` installed, and a `Bash` shell.
 
 
 ### Setup
