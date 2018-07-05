@@ -36,10 +36,11 @@ geth \
 	--nodiscover \
 	--rpc \
 	--rpcaddr 0.0.0.0 \
-	--rpcapi "db,eth,net,web3" \
+	--rpcapi "db,eth,net,web3,personal" \
 	--rpccorsdomain="*" \
 	--ws \
 	--wsaddr 0.0.0.0 \
 	--metrics \
 	--preload "$MINER_JS" \
+	--gcmode archive \
 	console

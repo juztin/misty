@@ -1,11 +1,13 @@
 # Misty
 
-Helper scripts that create a Geth node with 10 accounts, with balances of 999, and start an auto-mining Geth instance along with Mist.
+Collection of helper scripts that facilitate getting a private Geth node, with 10 prefunded accounts, up and running, as well as
+linking Mist up with the private node.
 
 ### Prerequisites
 
-The only requirements to use the helper scripts are having `Geth` installed, and a `Bash` shell.
-
+ - Bash
+ - Geth 1.8
+ - Truffle 4.1
 
 ### Setup
 
@@ -18,17 +20,13 @@ The only requirements to use the helper scripts are having `Geth` installed, and
 The following steps will:  
 _(these all need to be run from the same path)_
 
- - Initialize a new Geth node within the current directy
- - Start an automining Geth instance
- - Start an instance of Mist
-
  1. Initialize the Node
 
      ```bash
      % misty_init.sh
      ```
 
- 2. Start the Auto-Miner, and load into a Geth console
+ 2. Start the Auto-Miner, and drop into a Geth console
 
     ```bash
     % misty_run.sh
@@ -43,7 +41,7 @@ _(these all need to be run from the same path)_
     _*This script assumes you're on OSX, if not, just execute Mist like:_
 
     ```bash
-    Mist \
+    /path/to/mist/executable \
     	--network 10 \
     	--rpc `dirname "$0"`"/../.blockhain/geth.ipc"
     ```
