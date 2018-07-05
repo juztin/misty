@@ -8,6 +8,9 @@ linking Mist up with the private node.
  - Bash
  - Geth 1.8
  - Truffle 4.1
+ - [gethpkey](https://github.com/juztin/gethpkey) _(optional for use with `misty_init_keys.sh`)_
+
+The only requirements to use the helper scripts are having `Geth` and `Mist` installed, and a `Bash` shell.
 
 ### Setup
 
@@ -25,6 +28,13 @@ _(these all need to be run from the same path)_
      ```bash
      % misty_init.sh
      ```
+
+     or
+
+     ```bash
+     % misty_init_keys.sh
+     ```
+     _(this script uses `gethpkey` to output the public/private keys and password into `./.misty/accounts.json`)_
 
  2. Start the Auto-Miner, and drop into a Geth console
 
@@ -72,6 +82,11 @@ To setup Truffle to deploy contracts to the above Geth nodes:
      ```javascript
      // Unlocks the given account, with the corresponding password, for 15 seconds.
      web3.personal.unlockAccount("0x4b68328d09470cb954bd1f437af302de09bcbfa1", "password", 15000)
+     ```
+     or
+     ```javascript
+     // Unlocks all accounts, with the corresponding password, for 15 seconds.
+     web3.personal.listAccounts.forEach(function (account) { web3.personal.unlockAccount(account, "password", 15000)) } });
      ```
 
  3. Deploy your contract(s)
